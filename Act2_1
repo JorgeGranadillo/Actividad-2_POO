@@ -1,0 +1,26 @@
+#Punto 1
+
+class Persona:
+    def __init__(self, nombre, apellidos, numero_documento_identidad, ano_nacimiento):
+        self.nombre = nombre
+        self.apellidos = apellidos
+        self.numero_documento_identidad = numero_documento_identidad
+        self.ano_nacimiento = ano_nacimiento
+
+    def imprimir(self):
+        print(f"Nombre = {self.nombre}")
+        print(f"Apellidos = {self.apellidos}")
+        print(f"Numero de documento de identidad = {self.numero_documento_identidad}")
+        print(f"Año de nacimiento = {self.ano_nacimiento}")
+
+
+def main():
+    persona1 = Persona("Pedro", "Perez", "1053121010", 1998)
+    persona2 = Persona("Luis", "Leon", "1053223344", 2001)
+
+    persona1.imprimir()
+    persona2.imprimir()
+
+
+if __name__ == "__main__":
+    main()
