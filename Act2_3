@@ -1,0 +1,102 @@
+#Punto 3
+
+from enum import Enum
+
+
+class TipoCom(Enum):
+    GASOLINA = "Gasolina"
+    BIOETANOL = "Bioetanol"
+    DIESEL = "Diésel"
+    BIODIESEL = "Biodiésel"
+    GAS_NATURAL = "Gas Natural"
+
+
+class TipoA(Enum):
+    CIUDAD = "Ciudad"
+    SUBCOMPACTO = "Subcompacto"
+    COMPACTO = "Compacto"
+    FAMILIAR = "Familiar"
+    EJECUTIVO = "Ejecutivo"
+    SUV = "SUV"
+
+
+class TipoColor(Enum):
+    BLANCO = "Blanco"
+    NEGRO = "Negro"
+    ROJO = "Rojo"
+    NARANJA = "Naranja"
+    AMARILLO = "Amarillo"
+    VERDE = "Verde"
+    AZUL = "Azul"
+    VIOLETA = "Violeta"
+
+
+class Automovil:
+    def __init__(self, marca, modelo, motor, tipo_combustible, tipo_automovil,
+                 numero_puertas, cantidad_asientos, velocidad_maxima, color):
+        self.marca = marca
+        self.modelo = modelo
+        self.motor = motor
+        self.tipo_combustible = tipo_combustible
+        self.tipo_automovil = tipo_automovil
+        self.numero_puertas = numero_puertas
+        self.cantidad_asientos = cantidad_asientos
+        self.velocidad_maxima = velocidad_maxima
+        self.color = color
+        self.velocidad_actual = 0
+
+    def set_velocidad_actual(self, velocidad_actual):
+        self.velocidad_actual = velocidad_actual
+
+    def get_velocidad_actual(self):
+        return self.velocidad_actual
+
+    def acelerar(self, incremento_velocidad):
+        if self.velocidad_actual + incremento_velocidad < self.velocidad_maxima:
+            self.velocidad_actual += incremento_velocidad
+        else:
+            print("No se puede incrementar a una velocidad superior a la máxima del automóvil.")
+
+    def desacelerar(self, decremento_velocidad):
+        if self.velocidad_actual - decremento_velocidad > 0:
+            self.velocidad_actual -= decremento_velocidad
+        else:
+            print("No se puede decrementar a una velocidad negativa.")
+
+    def frenar(self):
+        self.velocidad_actual = 0
+
+    def imprimir(self):
+        print(f"Marca = {self.marca}")
+        print(f"Modelo = {self.modelo}")
+        print(f"Motor = {self.motor}")
+        print(f"Tipo de combustible = {self.tipo_combustible.value}")
+        print(f"Tipo de automóvil = {self.tipo_automovil.value}")
+        print(f"Número de puertas = {self.numero_puertas}")
+        print(f"Cantidad de asientos = {self.cantidad_asientos}")
+        print(f"Velocidad máxima = {self.velocidad_maxima}")
+        print(f"Color = {self.color.value}")
+        print(f"Velocidad actual = {self.velocidad_actual}")
+
+
+def main():
+    auto1 = Automovil("Ford", 2018, 3, TipoCom.DIESEL, TipoA.EJECUTIVO, 5, 6, 250, TipoColor.NEGRO)
+
+    auto1.imprimir()
+    auto1.set_velocidad_actual(100)
+    print(f"Velocidad actual = {auto1.get_velocidad_actual()}")
+
+    auto1.acelerar(20)
+    print(f"Velocidad actual = {auto1.get_velocidad_actual()}")
+
+    auto1.desacelerar(50)
+    print(f"Velocidad actual = {auto1.get_velocidad_actual()}")
+
+    auto1.frenar()
+    print(f"Velocidad actual = {auto1.get_velocidad_actual()}")
+
+    auto1.desacelerar(20)
+
+
+if __name__ == "__main__":
+    main()
