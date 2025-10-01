@@ -1,0 +1,79 @@
+#Punto 2
+
+from enum import Enum
+
+class TipoPlaneta(Enum):
+    """
+    Enum que representa los tipos de planetas:
+    GASEOSO, TERRESTRE, ENANO.
+    """
+    GASEOSO = 1
+    TERRESTRE = 2
+    ENANO = 3
+
+class Planeta:
+    def __init__(self, nombre: str, cantidad_satelites: int, masa: float,
+                 volumen: float, diametro: int, distancia_sol: int,
+                 tipo: TipoPlaneta, es_observable: bool):
+        """
+        Constructor de la clase Planeta.
+        Inicializa todos los atributos del planeta.
+        """
+        self.nombre = nombre
+        self.cantidad_satelites = cantidad_satelites
+        self.masa = masa
+        self.volumen = volumen
+        self.diametro = diametro
+        self.distancia_sol = distancia_sol
+        self.tipo = tipo
+        self.es_observable = es_observable
+
+    def imprimir(self):
+        """
+        Imprime en consola todos los atributos del planeta.
+        """
+        print(f"Nombre del planeta = {self.nombre}")
+        print(f"Cantidad de satélites = {self.cantidad_satelites}")
+        print(f"Masa del planeta = {self.masa}")
+        print(f"Volumen del planeta = {self.volumen}")
+        print(f"Diámetro del planeta = {self.diametro}")
+        print(f"Distancia al sol = {self.distancia_sol}")
+        # Se accede al nombre del enum con .name
+        print(f"Tipo de planeta = {self.tipo.name}")
+        print(f"Es observable = {self.es_observable}")
+
+    def calcular_densidad(self) -> float:
+        """
+        Método que calcula y devuelve la densidad de un planeta.
+        """
+        return self.masa / self.volumen
+
+    def es_planeta_exterior(self) -> bool:
+        """
+        Determina si el planeta es exterior basado en su distancia al sol.
+        """
+        limite = 149597870 * 3.4
+        if self.distancia_sol > limite:
+            return True
+        else:
+            return False
+def main():
+    """
+    Función principal que crea instancias de Planeta y muestra su información.
+    """
+    p1 = Planeta("Tierra", 1, 5.9736E24, 1.08321E12, 12742, 150000000,
+                 TipoPlaneta.TERRESTRE, True)
+    p1.imprimir()
+    print(f"Densidad del planeta = {p1.calcular_densidad()}")
+    print(f"Es planeta exterior = {p1.es_planeta_exterior()}")
+    print() # Imprime una línea en blanco para separar
+
+    p2 = Planeta("Júpiter", 79, 1.899E27, 1.4313E15, 139820, 750000000,
+                 TipoPlaneta.GASEOSO, True)
+    p2.imprimir()
+    print(f"Densidad del planeta = {p2.calcular_densidad()}")
+    print(f"Es planeta exterior = {p2.es_planeta_exterior()}")
+
+# Punto de entrada del programa en Python
+if __name__ == "__main__":
+    main()
